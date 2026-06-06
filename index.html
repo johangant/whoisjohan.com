@@ -1,87 +1,537 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
     <title>Johan Gant - Platform engineer and technical lead</title>
     <meta
       name="description"
       content="Platform engineer and technical lead helping teams build, run and improve large-scale open-source web platforms."
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Source Sans Pro", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-            },
-            colors: {
-              ink: "#1f2933",
-              ocean: "#1f7a8c",
-              mint: "#7ec9b0",
-              coral: "#f25f5c",
-            },
-          },
-        },
-      };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231f2933'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='white'%3EJG%3C/text%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --ink: #1f2933;
+        --ocean: #0f7082;
+        --mint: #7ec9b0;
+        --coral: #d83f3c;
+        --paper: #ffffff;
+        --soft: #f3f6f8;
+        --line: #d8e0e7;
+        --muted: #52616f;
+        --focus: #ffd166;
+        color: var(--ink);
+        font-family: "Source Sans Pro", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--soft);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        z-index: 20;
+        transform: translateY(-140%);
+        border-radius: 0.35rem;
+        background: var(--paper);
+        color: var(--ink);
+        font-weight: 700;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 10% 0%, rgb(126 201 176 / 0.28), transparent 34%),
+          linear-gradient(135deg, rgb(31 122 140 / 0.72), rgb(31 41 51 / 0.94));
+      }
+
+      .site-nav,
+      .hero-grid,
+      .section-inner,
+      .footer-inner {
+        position: relative;
+        width: min(100% - 2rem, 72rem);
+        margin-inline: auto;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 1.25rem;
+      }
+
+      .brand,
+      .nav-links a,
+      .button,
+      .footer-links a {
+        border-radius: 999px;
+        text-decoration: none;
+      }
+
+      .brand {
+        color: rgb(255 255 255 / 0.9);
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: none;
+        gap: 0.25rem;
+      }
+
+      .nav-links a,
+      .footer-links a {
+        color: rgb(255 255 255 / 0.86);
+        font-size: 0.95rem;
+        padding: 0.65rem 1rem;
+      }
+
+      .nav-links a:hover,
+      .footer-links a:hover {
+        background: rgb(255 255 255 / 0.12);
+        color: var(--paper);
+      }
+
+      .hero-grid {
+        display: grid;
+        align-items: center;
+        gap: 3rem;
+        min-height: 76vh;
+        padding-block: 3rem 5rem;
+      }
+
+      .eyebrow {
+        color: var(--ocean);
+        font-size: 0.875rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+      }
+
+      .hero .eyebrow {
+        display: inline-flex;
+        border: 1px solid rgb(255 255 255 / 0.28);
+        border-radius: 999px;
+        background: rgb(255 255 255 / 0.12);
+        color: rgb(255 255 255 / 0.9);
+        padding: 0.5rem 1rem;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        overflow-wrap: anywhere;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-block: 0;
+        line-height: 1.1;
+      }
+
+      h1 {
+        max-width: 13ch;
+        color: var(--paper);
+        font-size: clamp(3rem, 10vw, 5rem);
+        font-weight: 300;
+      }
+
+      h2 {
+        color: var(--ink);
+        font-size: clamp(2.25rem, 5vw, 3.5rem);
+        font-weight: 300;
+        max-width: 14ch;
+      }
+
+      h3 {
+        color: var(--ink);
+        font-size: 1.5rem;
+      }
+
+      .hero-copy {
+        max-width: 38rem;
+        color: rgb(255 255 255 / 0.9);
+        font-size: 1.3rem;
+        font-weight: 300;
+        line-height: 1.55;
+        margin: 1.75rem 0 0;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .button {
+        border: 1px solid rgb(255 255 255 / 0.36);
+        color: var(--paper);
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 0.8rem 1.1rem;
+        text-decoration: none;
+        transition: background-color 180ms ease, transform 180ms ease;
+      }
+
+      .button:hover {
+        background: rgb(255 255 255 / 0.12);
+        transform: translateY(-2px);
+      }
+
+      .button-primary {
+        border-color: var(--paper);
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .button-primary:hover {
+        background: #eef3f7;
+      }
+
+      .portrait-frame {
+        width: min(100%, 27rem);
+        margin-inline: auto;
+        border: 1px solid rgb(255 255 255 / 0.22);
+        border-radius: 2rem;
+        background: rgb(255 255 255 / 0.12);
+        padding: 0.75rem;
+        box-shadow: 0 24px 70px rgb(0 0 0 / 0.28);
+      }
+
+      .portrait-frame img {
+        aspect-ratio: 1;
+        width: 100%;
+        border-radius: 1.5rem;
+        object-fit: cover;
+      }
+
+      section {
+        padding-block: clamp(4rem, 8vw, 7rem);
+      }
+
+      #about,
+      #clients {
+        background: var(--paper);
+      }
+
+      #work {
+        background: var(--soft);
+      }
+
+      .about-grid {
+        display: grid;
+        gap: 2.5rem;
+      }
+
+      .body-copy {
+        color: var(--muted);
+        font-size: 1.125rem;
+        line-height: 1.75;
+      }
+
+      .body-copy p {
+        margin: 0;
+      }
+
+      .body-copy p + p {
+        margin-top: 1.25rem;
+      }
+
+      .section-heading {
+        max-width: 42rem;
+      }
+
+      .cards {
+        display: grid;
+        gap: 1.25rem;
+        margin-top: 3rem;
+      }
+
+      .service-card,
+      .client-card,
+      .logo-card {
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        background: var(--paper);
+      }
+
+      .service-card {
+        padding: clamp(1.25rem, 4vw, 1.75rem);
+        box-shadow: 0 1px 2px rgb(31 41 51 / 0.06);
+      }
+
+      .client-intro {
+        max-width: 48rem;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .client-intro h2 {
+        max-width: 16ch;
+        margin-inline: auto;
+      }
+
+      .client-intro .body-copy {
+        margin-top: 1.25rem;
+      }
+
+      .featured-clients {
+        display: grid;
+        gap: 1.25rem;
+        margin-top: 3.5rem;
+      }
+
+      .client-card,
+      .logo-card {
+        background: #f8fafc;
+        padding: 1rem;
+      }
+
+      .client-card {
+        padding: 1.5rem;
+      }
+
+      .logo-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 6rem;
+        border-radius: 0.35rem;
+        background: var(--paper);
+        padding: 1rem;
+        transition: box-shadow 180ms ease, transform 180ms ease;
+      }
+
+      .logo-link:hover {
+        box-shadow: 0 3px 12px rgb(31 41 51 / 0.12);
+        transform: translateY(-2px);
+      }
+
+      .logo-link img {
+        width: auto;
+        max-height: 4rem;
+        object-fit: contain;
+      }
+
+      .logo-link.dark {
+        background: #005984;
+      }
+
+      .client-card p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 1rem 0 0;
+      }
+
+      .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      footer {
+        background: var(--ink);
+        color: var(--paper);
+        padding-block: 3rem;
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+
+      .footer-name {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 700;
+      }
+
+      .copyright,
+      .credit {
+        color: rgb(255 255 255 / 0.72);
+        font-size: 0.95rem;
+        margin: 0.4rem 0 0;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .footer-links a {
+        border: 1px solid rgb(255 255 255 / 0.28);
+        text-decoration: none;
+      }
+
+      .credit a {
+        text-underline-offset: 0.25rem;
+      }
+
+      @media (min-width: 40rem) {
+        .nav-links {
+          display: flex;
+        }
+
+        .logo-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 48rem) {
+        .hero-grid {
+          grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+          padding-top: 4rem;
+        }
+
+        .about-grid {
+          grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        }
+
+        .cards,
+        .featured-clients {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .logo-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .footer-inner {
+          align-items: center;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      }
+
+      @media (min-width: 64rem) {
+        .logo-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .button:hover,
+        .logo-link:hover {
+          transform: none;
+        }
+      }
+    </style>
   </head>
-  <body class="bg-slate-50 font-sans text-ink antialiased">
-    <header class="relative overflow-hidden bg-ink text-white">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(126,201,176,0.35),transparent_34%),linear-gradient(135deg,rgba(31,122,140,0.72),rgba(31,41,51,0.92))]"></div>
-      <nav class="relative mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <a href="#" class="text-sm font-semibold uppercase tracking-[0.22em] text-white/80">Johan Gant</a>
-        <div class="hidden gap-2 sm:flex">
-          <a href="#about" class="rounded-full px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">About</a>
-          <a href="#work" class="rounded-full px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">Work</a>
-          <a href="#clients" class="rounded-full px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">Clients</a>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="hero">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/" class="brand" aria-label="Johan Gant home">Johan Gant</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#clients">Clients</a>
         </div>
       </nav>
 
-      <section class="relative mx-auto grid min-h-[78vh] max-w-6xl items-center gap-12 px-6 pb-20 pt-12 md:grid-cols-[1.1fr_0.9fr] md:pt-20">
+      <section class="hero-grid" aria-labelledby="page-title">
         <div>
-          <p class="mb-5 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white/80 backdrop-blur">
-            Johan Gant
-          </p>
-          <h1 class="max-w-3xl text-5xl font-light leading-tight text-white sm:text-6xl lg:text-7xl">
-            Platform engineer and technical lead
-          </h1>
-          <p class="mt-8 max-w-2xl text-xl font-light leading-8 text-white/78">
+          <p class="eyebrow">Johan Gant</p>
+          <h1 id="page-title">Platform engineer and technical lead</h1>
+          <p class="hero-copy">
             I help teams build, run and improve large-scale open-source web platforms.
           </p>
-          <div class="mt-10 flex flex-wrap gap-3">
-            <a href="#about" class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-slate-100">About me</a>
-            <a href="#work" class="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10">What I do</a>
-            <a href="#clients" class="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10">Clients</a>
+          <div class="actions" aria-label="Page sections">
+            <a href="#about" class="button button-primary">About me</a>
+            <a href="#work" class="button">What I do</a>
+            <a href="#clients" class="button">Clients</a>
           </div>
         </div>
-        <div class="mx-auto w-full max-w-sm md:max-w-md">
-          <div class="aspect-square overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur">
-            <img
-              class="h-full w-full rounded-[1.5rem] object-cover"
-              src="https://d33wubrfki0l68.cloudfront.net/66a23c643592275b50d516cc2fb5cf9e27818722/5adb2/static/me-d0a2a4936ba3ef8331aa53f8aab8545b.png"
-              alt="Hello, it's a picture of me"
-            />
-          </div>
+        <div class="portrait-frame">
+          <img
+            src="assets/johan-gant.webp"
+            alt="Portrait of Johan Gant"
+            width="512"
+            height="512"
+            decoding="async"
+            fetchpriority="high"
+          />
         </div>
       </section>
     </header>
 
-    <main>
-      <section id="about" class="bg-white px-6 py-20 md:py-28">
-        <div class="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.8fr_1.2fr]">
+    <main id="main" tabindex="-1">
+      <section id="about" aria-labelledby="about-title">
+        <div class="section-inner about-grid">
           <div>
-            <p class="text-sm font-bold uppercase tracking-[0.22em] text-ocean">About me</p>
-            <h2 class="mt-4 text-4xl font-light leading-tight text-ink md:text-5xl">Practical engineering for teams that need things to work.</h2>
+            <p class="eyebrow">About me</p>
+            <h2 id="about-title">Practical engineering for teams that need things to work.</h2>
           </div>
-          <div class="space-y-6 text-lg leading-8 text-slate-600">
+          <div class="body-copy">
             <p>
               I have spent most of my career in UK digital agencies, working with public sector, charity, media, education, policy and professional services teams.
             </p>
@@ -95,17 +545,17 @@
         </div>
       </section>
 
-      <section id="work" class="bg-slate-100 px-6 py-20 md:py-28">
-        <div class="mx-auto max-w-6xl">
-          <div class="max-w-2xl">
-            <p class="text-sm font-bold uppercase tracking-[0.22em] text-coral">What I do</p>
-            <h2 class="mt-4 text-4xl font-light leading-tight text-ink md:text-5xl">Where I can help.</h2>
+      <section id="work" aria-labelledby="work-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">What I do</p>
+            <h2 id="work-title">Where I can help.</h2>
           </div>
 
-          <div class="mt-12 grid gap-5 md:grid-cols-2">
-            <article class="rounded-lg bg-white p-7 shadow-sm ring-1 ring-slate-200">
-              <h3 class="text-2xl font-semibold text-ink">Platform engineering</h3>
-              <div class="mt-4 space-y-4 leading-7 text-slate-600">
+          <div class="cards">
+            <article class="service-card">
+              <h3>Platform engineering</h3>
+              <div class="body-copy">
                 <p>
                   I come from a web development background, with practical experience across Drupal, GatsbyJS/React, Python, WordPress and Node.js. I use Docker, DDEV and cloud tooling regularly.
                 </p>
@@ -115,9 +565,9 @@
               </div>
             </article>
 
-            <article class="rounded-lg bg-white p-7 shadow-sm ring-1 ring-slate-200">
-              <h3 class="text-2xl font-semibold text-ink">Technical direction</h3>
-              <div class="mt-4 space-y-4 leading-7 text-slate-600">
+            <article class="service-card">
+              <h3>Technical direction</h3>
+              <div class="body-copy">
                 <p>
                   I help teams make technical decisions they can live with. That can mean reviewing a build, choosing a hosting route, spotting delivery risks, or sense-checking a supplier proposal.
                 </p>
@@ -127,9 +577,9 @@
               </div>
             </article>
 
-            <article class="rounded-lg bg-white p-7 shadow-sm ring-1 ring-slate-200">
-              <h3 class="text-2xl font-semibold text-ink">Technical leadership</h3>
-              <div class="mt-4 space-y-4 leading-7 text-slate-600">
+            <article class="service-card">
+              <h3>Technical leadership</h3>
+              <div class="body-copy">
                 <p>
                   I have recruited, built and managed developer teams, both remote and on-site. I have also led pitches, interviews, planning and delivery standards.
                 </p>
@@ -139,164 +589,94 @@
               </div>
             </article>
 
-            <article class="rounded-lg bg-white p-7 shadow-sm ring-1 ring-slate-200">
-              <h3 class="text-2xl font-semibold text-ink">Mentoring</h3>
-              <p class="mt-4 leading-7 text-slate-600">
-                I help engineers grow through real work: clearer judgement, better habits, stronger delivery and a more honest view of what they want from their career.
-              </p>
+            <article class="service-card">
+              <h3>Mentoring</h3>
+              <div class="body-copy">
+                <p>
+                  I help engineers grow through real work: clearer judgement, better habits, stronger delivery and a more honest view of what they want from their career.
+                </p>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="clients" class="bg-white px-6 py-20 md:py-28">
-        <div class="mx-auto max-w-6xl">
-          <div class="mx-auto max-w-3xl text-center">
-            <p class="text-sm font-bold uppercase tracking-[0.22em] text-ocean">Clients</p>
-            <h2 class="mt-4 text-4xl font-light leading-tight text-ink md:text-5xl">Work trusted by teams with real public reach.</h2>
-            <p class="mt-6 text-lg leading-8 text-slate-600">
+      <section id="clients" aria-labelledby="clients-title">
+        <div class="section-inner">
+          <div class="client-intro">
+            <p class="eyebrow">Clients</p>
+            <h2 id="clients-title">Work trusted by teams with real public reach.</h2>
+            <p class="body-copy">
               I have worked with government services, charities, universities, media brands, policy teams, environmental organisations, professional services firms and startups.
             </p>
           </div>
 
-          <div class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-6">
-              <a href="https://www.finance-ni.gov.uk/topics/working-northern-ireland-civil-service" target="_blank" rel="noopener noreferrer" aria-label="Visit the Northern Ireland Civil Service website" class="flex h-24 items-center justify-center rounded-md bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-16 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/674cad5a5affd4797eb263acc439a2d02acaa684/3bc00/static/nics-9d9687e614317305482147d2b91025a0.png" alt="Northern Ireland Civil Service logo" />
+          <div class="featured-clients">
+            <article class="client-card">
+              <a href="https://www.finance-ni.gov.uk/topics/working-northern-ireland-civil-service" target="_blank" rel="noopener noreferrer" aria-label="Visit the Northern Ireland Civil Service website" class="logo-link">
+                <img src="https://d33wubrfki0l68.cloudfront.net/674cad5a5affd4797eb263acc439a2d02acaa684/3bc00/static/nics-9d9687e614317305482147d2b91025a0.png" alt="Northern Ireland Civil Service logo" width="180" height="64" loading="lazy" decoding="async" />
               </a>
-              <p class="mt-5 text-sm leading-6 text-slate-600">Development, consultancy, technical training, hosting procurement and migration.</p>
+              <p>Development, consultancy, technical training, hosting procurement and migration.</p>
             </article>
 
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-6">
-              <a href="https://www.food.gov.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Food Standards Agency website" class="flex h-24 items-center justify-center rounded-md bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-16 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/191935051df609654f47a1d27eac078494c05775/da0ca/static/fsa-7dd0adc065b353a6a5d765c799550e0c.png" alt="Food Standards Agency logo" />
+            <article class="client-card">
+              <a href="https://www.food.gov.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Food Standards Agency website" class="logo-link">
+                <img src="https://d33wubrfki0l68.cloudfront.net/191935051df609654f47a1d27eac078494c05775/da0ca/static/fsa-7dd0adc065b353a6a5d765c799550e0c.png" alt="Food Standards Agency logo" width="180" height="64" loading="lazy" decoding="async" />
               </a>
-              <p class="mt-5 text-sm leading-6 text-slate-600">Development, consultancy and cloud hosting delivery with multiple partners.</p>
+              <p>Development, consultancy and cloud hosting delivery with multiple partners.</p>
             </article>
 
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-6">
-              <a href="https://www.itv.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit the ITV website" class="flex h-24 items-center justify-center rounded-md bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-16 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/ff4a78262f2b2f20763755e92d81f3d12fef37e9/bd6af/static/itv-eea44286390c8a1ab557c314de67e4ec.png" alt="ITV logo" />
+            <article class="client-card">
+              <a href="https://www.itv.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit the ITV website" class="logo-link">
+                <img src="https://d33wubrfki0l68.cloudfront.net/ff4a78262f2b2f20763755e92d81f3d12fef37e9/bd6af/static/itv-eea44286390c8a1ab557c314de67e4ec.png" alt="ITV logo" width="180" height="64" loading="lazy" decoding="async" />
               </a>
-              <p class="mt-5 text-sm leading-6 text-slate-600">Managed the technical team for a high-profile press centre project.</p>
+              <p>Managed the technical team for a high-profile press centre project.</p>
             </article>
 
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-6">
-              <a href="https://www.chathamhouse.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Chatham House website" class="flex h-24 items-center justify-center rounded-md bg-[#005984] p-5 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-16 max-w-full object-contain" src="assets/chatham-house.svg" alt="Chatham House logo" />
+            <article class="client-card">
+              <a href="https://www.chathamhouse.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Chatham House website" class="logo-link dark">
+                <img src="assets/chatham-house.svg" alt="Chatham House logo" width="180" height="64" loading="lazy" decoding="async" />
               </a>
-              <p class="mt-5 text-sm leading-6 text-slate-600">Technical leadership, development and systems integration for a leading policy institute.</p>
+              <p>Technical leadership, development and systems integration for a leading policy institute.</p>
             </article>
           </div>
 
-          <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.greenpeace.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Greenpeace website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/greenpeace.png" alt="Greenpeace logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.actionaid.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the ActionAid website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/3efc49e69b7e6c1ee42fd98c4142b16218ab5b84/d2d51/static/actionaid-43f1e8dfaedde7d1543b8d2e5d5b0d91.png" alt="ActionAid logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://plan-uk.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Plan International website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/plan-international.png" alt="Plan International logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.nuffieldtrust.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Nuffield Trust website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/nuffield-trust.png" alt="Nuffield Trust logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.kingsfund.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit The King's Fund website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/kings-fund.png" alt="The King's Fund logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.oxfam.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Oxfam website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/35fea12bf125a21947bea18306bef88f7c3219f2/09433/static/oxfam-2c57eb131e166cbea98550a2a1b38d30.png" alt="Oxfam logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.tuc.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Trades Union Congress website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/trades-union-congress.png" alt="Trades Union Congress logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.ox.ac.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the University of Oxford website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/university-of-oxford.png" alt="University of Oxford logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.sheffield.ac.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the University of Sheffield website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/0b7a41f88a3f0ccf7e2643bea799282464885527/03b76/static/sheffield-cdd12f4c46864312bc5dec72f5bdd60d.png" alt="University of Sheffield logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.rau.ac.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Royal Agricultural University website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/f17d461b048eef7f40b290318b8b712b76b522f7/27cea/static/rau-d0ff3498ae8e14585b9330d83287b25b.png" alt="Royal Agricultural University logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.aoc.co.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Association of Colleges website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/association-of-colleges.png" alt="Association of Colleges logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.thedonkeysanctuary.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit The Donkey Sanctuary website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/donkey-sanctuary.png" alt="The Donkey Sanctuary logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.younglivesvscancer.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Young Lives vs Cancer website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/8fc35c03cff223253e2135d1ea37c8fb77632e6d/0f561/static/clic-131bb3a5012eb9e64118834955150d1e.png" alt="CLIC Sargent logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.csp.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Chartered Society of Physiotherapy website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/c2ab90b18da79f5c5743025ab22badb38b387095/7518e/static/csp-ed12f620770046c5f8f9b64415a1d243.png" alt="Chartered Society of Physiotherapists logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.jrf.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Joseph Rowntree Foundation website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/joseph-rowntree-foundation.png" alt="Joseph Rowntree Foundation logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.wrap.ngo/" target="_blank" rel="noopener noreferrer" aria-label="Visit the WRAP website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/wrap.png" alt="WRAP logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://ukgbc.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit the UK Green Building Council website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="assets/uk-green-building-council.png" alt="UK Green Building Council logo" />
-              </a>
-            </article>
-            <article class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <a href="https://www.bdo.co.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the BDO UK website" class="flex h-20 items-center justify-center rounded-md bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean">
-                <img class="max-h-14 max-w-full object-contain" src="https://d33wubrfki0l68.cloudfront.net/8218f7a04673859c9e02d651d8784f231f885b74/44cc9/static/bdo-f20f36ee9925d6b92e7510ab6ad82468.png" alt="BDO logo" />
-              </a>
-            </article>
+          <div class="logo-grid" aria-label="Additional clients">
+            <article class="logo-card"><a href="https://www.greenpeace.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Greenpeace website" class="logo-link"><img src="assets/greenpeace.png" alt="Greenpeace logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.actionaid.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the ActionAid website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/3efc49e69b7e6c1ee42fd98c4142b16218ab5b84/d2d51/static/actionaid-43f1e8dfaedde7d1543b8d2e5d5b0d91.png" alt="ActionAid logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://plan-uk.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Plan International website" class="logo-link"><img src="assets/plan-international.png" alt="Plan International logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.nuffieldtrust.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Nuffield Trust website" class="logo-link"><img src="assets/nuffield-trust.png" alt="Nuffield Trust logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.kingsfund.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit The King's Fund website" class="logo-link"><img src="assets/kings-fund.png" alt="The King's Fund logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.oxfam.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Oxfam website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/35fea12bf125a21947bea18306bef88f7c3219f2/09433/static/oxfam-2c57eb131e166cbea98550a2a1b38d30.png" alt="Oxfam logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.tuc.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Trades Union Congress website" class="logo-link"><img src="assets/trades-union-congress.png" alt="Trades Union Congress logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.ox.ac.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the University of Oxford website" class="logo-link"><img src="assets/university-of-oxford.png" alt="University of Oxford logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.sheffield.ac.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the University of Sheffield website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/0b7a41f88a3f0ccf7e2643bea799282464885527/03b76/static/sheffield-cdd12f4c46864312bc5dec72f5bdd60d.png" alt="University of Sheffield logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.rau.ac.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Royal Agricultural University website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/f17d461b048eef7f40b290318b8b712b76b522f7/27cea/static/rau-d0ff3498ae8e14585b9330d83287b25b.png" alt="Royal Agricultural University logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.aoc.co.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Association of Colleges website" class="logo-link"><img src="assets/association-of-colleges.png" alt="Association of Colleges logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.thedonkeysanctuary.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit The Donkey Sanctuary website" class="logo-link"><img src="assets/donkey-sanctuary.png" alt="The Donkey Sanctuary logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.younglivesvscancer.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Young Lives vs Cancer website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/8fc35c03cff223253e2135d1ea37c8fb77632e6d/0f561/static/clic-131bb3a5012eb9e64118834955150d1e.png" alt="Young Lives vs Cancer logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.csp.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Chartered Society of Physiotherapy website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/c2ab90b18da79f5c5743025ab22badb38b387095/7518e/static/csp-ed12f620770046c5f8f9b64415a1d243.png" alt="Chartered Society of Physiotherapy logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.jrf.org.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Joseph Rowntree Foundation website" class="logo-link"><img src="assets/joseph-rowntree-foundation.png" alt="Joseph Rowntree Foundation logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.wrap.ngo/" target="_blank" rel="noopener noreferrer" aria-label="Visit the WRAP website" class="logo-link"><img src="assets/wrap.png" alt="WRAP logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://ukgbc.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit the UK Green Building Council website" class="logo-link"><img src="assets/uk-green-building-council.png" alt="UK Green Building Council logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
+            <article class="logo-card"><a href="https://www.bdo.co.uk/" target="_blank" rel="noopener noreferrer" aria-label="Visit the BDO UK website" class="logo-link"><img src="https://d33wubrfki0l68.cloudfront.net/8218f7a04673859c9e02d651d8784f231f885b74/44cc9/static/bdo-f20f36ee9925d6b92e7510ab6ad82468.png" alt="BDO logo" width="180" height="72" loading="lazy" decoding="async" /></a></article>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="bg-ink px-6 py-12 text-white">
-      <div class="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
+    <footer>
+      <div class="footer-inner">
         <div>
-          <p class="text-lg font-semibold">Johan Gant</p>
-          <p class="mt-2 text-sm text-white/60">&copy; Johan Gant</p>
+          <p class="footer-name">Johan Gant</p>
+          <p class="copyright">&copy; Johan Gant</p>
         </div>
-        <div class="flex flex-wrap gap-3">
-          <a href="https://github.com/johangant" class="rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">GitHub</a>
-          <a href="https://www.linkedin.com/in/johangant/" class="rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">LinkedIn</a>
+        <div class="footer-links" aria-label="Social links">
+          <a href="https://github.com/johangant" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/johangant/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
-        <p class="max-w-md text-sm leading-6 text-white/50">
-          Original design credit: <a class="underline decoration-white/30 underline-offset-4 hover:text-white" href="http://html5up.net">HTML5 UP</a>.
+        <p class="credit">
+          Original design credit: <a href="http://html5up.net">HTML5 UP</a>.
         </p>
       </div>
     </footer>
