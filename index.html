@@ -4,487 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <title>Johan Gant - Platform engineer and technical lead</title>
+    <title>Johan Gant - AI-literate platform engineer and technical lead</title>
     <meta
       name="description"
-      content="Platform engineer and technical lead helping teams build, run and improve large-scale open-source web platforms."
+      content="AI-literate platform engineer and technical lead helping teams build, run and improve open-source web platforms with pragmatic use of Claude, Codex, DeepSeek and modern delivery tooling."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231f2933'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='white'%3EJG%3C/text%3E%3C/svg%3E" />
-    <style>
-      :root {
-        --ink: #1f2933;
-        --ocean: #0f7082;
-        --mint: #7ec9b0;
-        --coral: #d83f3c;
-        --paper: #ffffff;
-        --soft: #f3f6f8;
-        --line: #d8e0e7;
-        --muted: #52616f;
-        --focus: #ffd166;
-        color: var(--ink);
-        font-family: "Source Sans Pro", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.5;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        background: var(--soft);
-        color: var(--ink);
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-      }
-
-      img,
-      svg {
-        display: block;
-        max-width: 100%;
-      }
-
-      a {
-        color: inherit;
-      }
-
-      a:focus-visible {
-        outline: 3px solid var(--focus);
-        outline-offset: 4px;
-      }
-
-      .skip-link {
-        position: absolute;
-        left: 1rem;
-        top: 1rem;
-        z-index: 20;
-        transform: translateY(-140%);
-        border-radius: 0.35rem;
-        background: var(--paper);
-        color: var(--ink);
-        font-weight: 700;
-        padding: 0.75rem 1rem;
-        text-decoration: none;
-      }
-
-      .skip-link:focus {
-        transform: translateY(0);
-      }
-
-      .hero {
-        position: relative;
-        overflow: hidden;
-        background: var(--ink);
-        color: var(--paper);
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at 10% 0%, rgb(126 201 176 / 0.28), transparent 34%),
-          linear-gradient(135deg, rgb(31 122 140 / 0.72), rgb(31 41 51 / 0.94));
-      }
-
-      .site-nav,
-      .hero-grid,
-      .section-inner,
-      .footer-inner {
-        position: relative;
-        width: min(100% - 2rem, 72rem);
-        margin-inline: auto;
-      }
-
-      .site-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding-block: 1.25rem;
-      }
-
-      .brand,
-      .nav-links a,
-      .button,
-      .footer-links a {
-        border-radius: 999px;
-        text-decoration: none;
-      }
-
-      .brand {
-        color: rgb(255 255 255 / 0.9);
-        font-size: 0.875rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .nav-links {
-        display: none;
-        gap: 0.25rem;
-      }
-
-      .nav-links a,
-      .footer-links a {
-        color: rgb(255 255 255 / 0.86);
-        font-size: 0.95rem;
-        padding: 0.65rem 1rem;
-      }
-
-      .nav-links a:hover,
-      .footer-links a:hover {
-        background: rgb(255 255 255 / 0.12);
-        color: var(--paper);
-      }
-
-      .hero-grid {
-        display: grid;
-        align-items: center;
-        gap: 3rem;
-        min-height: 76vh;
-        padding-block: 3rem 5rem;
-      }
-
-      .eyebrow {
-        color: var(--ocean);
-        font-size: 0.875rem;
-        font-weight: 800;
-        letter-spacing: 0.14em;
-        margin: 0 0 1rem;
-        text-transform: uppercase;
-      }
-
-      .hero .eyebrow {
-        display: inline-flex;
-        border: 1px solid rgb(255 255 255 / 0.28);
-        border-radius: 999px;
-        background: rgb(255 255 255 / 0.12);
-        color: rgb(255 255 255 / 0.9);
-        padding: 0.5rem 1rem;
-        text-transform: none;
-        letter-spacing: 0;
-      }
-
-      h1,
-      h2,
-      h3,
-      p {
-        overflow-wrap: anywhere;
-      }
-
-      h1,
-      h2,
-      h3 {
-        margin-block: 0;
-        line-height: 1.1;
-      }
-
-      h1 {
-        max-width: 13ch;
-        color: var(--paper);
-        font-size: clamp(3rem, 10vw, 5rem);
-        font-weight: 300;
-      }
-
-      h2 {
-        color: var(--ink);
-        font-size: clamp(2.25rem, 5vw, 3.5rem);
-        font-weight: 300;
-        max-width: 14ch;
-      }
-
-      h3 {
-        color: var(--ink);
-        font-size: 1.5rem;
-      }
-
-      .hero-copy {
-        max-width: 38rem;
-        color: rgb(255 255 255 / 0.9);
-        font-size: 1.3rem;
-        font-weight: 300;
-        line-height: 1.55;
-        margin: 1.75rem 0 0;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 2rem;
-      }
-
-      .button {
-        border: 1px solid rgb(255 255 255 / 0.36);
-        color: var(--paper);
-        font-size: 0.95rem;
-        font-weight: 700;
-        padding: 0.8rem 1.1rem;
-        text-decoration: none;
-        transition: background-color 180ms ease, transform 180ms ease;
-      }
-
-      .button:hover {
-        background: rgb(255 255 255 / 0.12);
-        transform: translateY(-2px);
-      }
-
-      .button-primary {
-        border-color: var(--paper);
-        background: var(--paper);
-        color: var(--ink);
-      }
-
-      .button-primary:hover {
-        background: #eef3f7;
-      }
-
-      .portrait-frame {
-        width: min(100%, 27rem);
-        margin-inline: auto;
-        border: 1px solid rgb(255 255 255 / 0.22);
-        border-radius: 2rem;
-        background: rgb(255 255 255 / 0.12);
-        padding: 0.75rem;
-        box-shadow: 0 24px 70px rgb(0 0 0 / 0.28);
-      }
-
-      .portrait-frame img {
-        aspect-ratio: 1;
-        width: 100%;
-        border-radius: 1.5rem;
-        object-fit: cover;
-      }
-
-      section {
-        padding-block: clamp(4rem, 8vw, 7rem);
-      }
-
-      #about,
-      #clients {
-        background: var(--paper);
-      }
-
-      #work {
-        background: var(--soft);
-      }
-
-      .about-grid {
-        display: grid;
-        gap: 2.5rem;
-      }
-
-      .body-copy {
-        color: var(--muted);
-        font-size: 1.125rem;
-        line-height: 1.75;
-      }
-
-      .body-copy p {
-        margin: 0;
-      }
-
-      .body-copy p + p {
-        margin-top: 1.25rem;
-      }
-
-      .section-heading {
-        max-width: 42rem;
-      }
-
-      .cards {
-        display: grid;
-        gap: 1.25rem;
-        margin-top: 3rem;
-      }
-
-      .service-card,
-      .client-card,
-      .logo-card {
-        border: 1px solid var(--line);
-        border-radius: 0.5rem;
-        background: var(--paper);
-      }
-
-      .service-card {
-        padding: clamp(1.25rem, 4vw, 1.75rem);
-        box-shadow: 0 1px 2px rgb(31 41 51 / 0.06);
-      }
-
-      .client-intro {
-        max-width: 48rem;
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      .client-intro h2 {
-        max-width: 16ch;
-        margin-inline: auto;
-      }
-
-      .client-intro .body-copy {
-        margin-top: 1.25rem;
-      }
-
-      .featured-clients {
-        display: grid;
-        gap: 1.25rem;
-        margin-top: 3.5rem;
-      }
-
-      .client-card,
-      .logo-card {
-        background: #f8fafc;
-        padding: 1rem;
-      }
-
-      .client-card {
-        padding: 1.5rem;
-      }
-
-      .logo-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 6rem;
-        border-radius: 0.35rem;
-        background: var(--paper);
-        padding: 1rem;
-        transition: box-shadow 180ms ease, transform 180ms ease;
-      }
-
-      .logo-link:hover {
-        box-shadow: 0 3px 12px rgb(31 41 51 / 0.12);
-        transform: translateY(-2px);
-      }
-
-      .logo-link img {
-        width: auto;
-        max-height: 4rem;
-        object-fit: contain;
-      }
-
-      .logo-link.dark {
-        background: #005984;
-      }
-
-      .client-card p {
-        color: var(--muted);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin: 1rem 0 0;
-      }
-
-      .logo-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-        margin-top: 2rem;
-      }
-
-      footer {
-        background: var(--ink);
-        color: var(--paper);
-        padding-block: 3rem;
-      }
-
-      .footer-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 1.75rem;
-      }
-
-      .footer-name {
-        margin: 0;
-        font-size: 1.125rem;
-        font-weight: 700;
-      }
-
-      .copyright,
-      .credit {
-        color: rgb(255 255 255 / 0.72);
-        font-size: 0.95rem;
-        margin: 0.4rem 0 0;
-      }
-
-      .footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-      }
-
-      .footer-links a {
-        border: 1px solid rgb(255 255 255 / 0.28);
-        text-decoration: none;
-      }
-
-      .credit a {
-        text-underline-offset: 0.25rem;
-      }
-
-      @media (min-width: 40rem) {
-        .nav-links {
-          display: flex;
-        }
-
-        .logo-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-      }
-
-      @media (min-width: 48rem) {
-        .hero-grid {
-          grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
-          padding-top: 4rem;
-        }
-
-        .about-grid {
-          grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-        }
-
-        .cards,
-        .featured-clients {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .logo-grid {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-
-        .footer-inner {
-          align-items: center;
-          flex-direction: row;
-          justify-content: space-between;
-        }
-      }
-
-      @media (min-width: 64rem) {
-        .logo-grid {
-          grid-template-columns: repeat(6, minmax(0, 1fr));
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          scroll-behavior: auto !important;
-          transition-duration: 0.01ms !important;
-        }
-
-        .button:hover,
-        .logo-link:hover {
-          transform: none;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -503,7 +32,7 @@
           <p class="eyebrow">Johan Gant</p>
           <h1 id="page-title">Platform engineer and technical lead</h1>
           <p class="hero-copy">
-            I help teams build, run and improve large-scale open-source web platforms.
+            I help teams build, run and improve open-source web platforms with practical AI literacy across the software development lifecycle.
           </p>
           <div class="actions" aria-label="Page sections">
             <a href="#about" class="button button-primary">About me</a>
@@ -529,7 +58,7 @@
         <div class="section-inner about-grid">
           <div>
             <p class="eyebrow">About me</p>
-            <h2 id="about-title">Practical engineering for teams that need things to work.</h2>
+            <h2 id="about-title">Practical solutions for teams that need things to work.</h2>
           </div>
           <div class="body-copy">
             <p>
@@ -539,7 +68,7 @@
               I have worked as a developer, architect, project lead and team lead. That mix has taught me where projects usually get stuck: unclear ownership, fragile environments, slow releases and decisions that fall apart once the work starts.
             </p>
             <p>
-              My focus now is platform engineering: better environments, safer releases, sensible hosting, useful automation and the habits that help teams keep moving after launch.
+              My focus now is platform engineering, team dynamics and pragmatic AI literacy: better environments, safer releases, sensible hosting, useful automation and the habits that help teams use tools like Claude, Codex and DeepSeek responsibly before and after launch.
             </p>
           </div>
         </div>
@@ -557,7 +86,7 @@
               <h3>Platform engineering</h3>
               <div class="body-copy">
                 <p>
-                  I come from a web development background, with practical experience across Drupal, GatsbyJS/React, Python, WordPress and Node.js. I use Docker, DDEV and cloud tooling regularly.
+                  I come from a web development background, with practical experience across PHP, Drupal, WordPress, Python and Node.js. I use Docker, DDEV, cloud tooling and modern CI/CD services regularly.
                 </p>
                 <p>
                   I am strongest where code, hosting, environments and team workflow meet. I help make those parts simpler, more reliable and easier for teams to own.
@@ -566,13 +95,13 @@
             </article>
 
             <article class="service-card">
-              <h3>Technical direction</h3>
+              <h3>AI-literate delivery</h3>
               <div class="body-copy">
                 <p>
-                  I help teams make technical decisions they can live with. That can mean reviewing a build, choosing a hosting route, spotting delivery risks, or sense-checking a supplier proposal.
+                  I help teams use AI tools as part of a disciplined software development lifecycle, from discovery and prototyping through review, testing, documentation and maintenance.
                 </p>
                 <p>
-                  My advice stays close to the work: what the team can run, what the system needs, and what will still make sense after launch.
+                  That means knowing where Claude, Codex, DeepSeek and similar tools are useful, where they are risky, and how to keep human judgement, security, maintainability and delivery ownership in the loop.
                 </p>
               </div>
             </article>
@@ -590,10 +119,13 @@
             </article>
 
             <article class="service-card">
-              <h3>Mentoring</h3>
+              <h3>Technical direction and mentoring</h3>
               <div class="body-copy">
                 <p>
-                  I help engineers grow through real work: clearer judgement, better habits, stronger delivery and a more honest view of what they want from their career.
+                  I help teams make technical decisions they can live with: reviewing builds, choosing hosting routes, spotting delivery risks, sense-checking supplier proposals and improving engineering habits through real work.
+                </p>
+                <p>
+                  I also help engineers build clearer judgement around AI-assisted development, so speed gains do not come at the cost of quality, context or accountability.
                 </p>
               </div>
             </article>
