@@ -284,6 +284,11 @@ section {
   max-width: 42rem;
 }
 
+.section-heading h2,
+.client-intro h2 {
+  max-width: none;
+}
+
 .cards {
   display: grid;
   gap: 1.25rem;
@@ -303,6 +308,10 @@ section {
   box-shadow: 0 1px 2px rgb(31 41 51 / 0.06);
 }
 
+.service-card .body-copy {
+  margin-top: 1rem;
+}
+
 .client-intro {
   max-width: 48rem;
   margin-inline: auto;
@@ -310,7 +319,6 @@ section {
 }
 
 .client-intro h2 {
-  max-width: 16ch;
   margin-inline: auto;
 }
 
